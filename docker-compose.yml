@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - "rabbitmq_data:/var/lib/rabbitmq"
+    networks:
+      - backend
+
+  worker:
+    user: "1001:1001"
+    deploy:
+      replicas: 4
+    build:
+      dockerfile: worker/Dockerfile
+      context: .
+    volumes:
+      - "./worker:/usr/src/app"
+      - "./common:/usr/src/app/common"  # Add this line
+    depends_on:
+      - rabbitmq
+    networks:
+      - backend
+
+  api:
+    build:
+      dockerfile: api/Dockerfile
+    volumes:
+      - "./api:/usr/src/app"
+      - "./common:/usr/src/app/common"  # Add this line
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+    networks:
+      - backend
+
+
+networks:
+  backend:
+
+volumes:
+  rabbitmq_data:
