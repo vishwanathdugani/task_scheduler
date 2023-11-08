@@ -59,6 +59,8 @@ Please note that this implementation was done with limited time, and more improv
 - **Testing:** Increase the coverage and scope of automated tests.
 - **Logging:** Enhance logging mechanisms for better tracking and debugging.
 - **Optimization:** Fine-tune the worker handling for more efficient processing.
+- **Security:** Securing APIs and message broker for unauthorized entries.
+- **UI:** A UI to login and add tasks to process
 
 ## API Endpoints
 

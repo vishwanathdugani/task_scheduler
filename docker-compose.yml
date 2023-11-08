@@ -20,7 +20,7 @@ services:
       context: .
     volumes:
       - "./worker:/usr/src/app"
-      - "./common:/usr/src/app/common"  # Add this line
+      - "./common:/usr/src/app/common"
     depends_on:
       - rabbitmq
     networks:
@@ -31,7 +31,7 @@ services:
       dockerfile: api/Dockerfile
     volumes:
       - "./api:/usr/src/app"
-      - "./common:/usr/src/app/common"  # Add this line
+      - "./common:/usr/src/app/common"
     ports:
       - "8000:8000"
     depends_on:
